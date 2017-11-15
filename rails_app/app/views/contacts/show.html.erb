@@ -1,0 +1,11 @@
+<div class='row'>
+  <div class='col-lg-12'>
+    <%= content_tag :h3, "Página do contato - #{@contact.email}" %>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-lg-12'>
+    <%= render 'accesses_table', accesses: @contact.accesses %>
+  </div>
+</div>
