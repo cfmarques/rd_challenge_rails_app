@@ -1,5 +1,5 @@
 var UserTracking = (function () {
-  var Storage = {
+  var Store = {
     _get: function (key) {
       return JSON.parse(localStorage.getItem(key));
     },
@@ -10,41 +10,41 @@ var UserTracking = (function () {
     },
 
     userEmail: function () {
-      console.log('user email returned!');
       return this._get('userEmail');
     },
 
-    trackingDataList: function () {
-      var trackingDataList = this._get('trackingDataList') || [];
-      this._set('trackingDataList', trackingDataList);
-      console.log('tracking data returned!');
-      return trackingDataList;
+    accessedPages: function () {
+      var accessedPages = this._get('accessedPages') || [];
+
+      if (accessedPages.length === 0) {
+        this._set('accessedPages', accessedPages);
+      }
+
+      return accessedPages;
     },
 
     saveUserEmail: function (userEmail) {
       this._set('userEmail', userEmail);
-      console.log('user email saved!');
     },
 
-    addTrackingData: function (trackingData) {
-      var trackingDataList = this.trackingDataList();
-      trackingDataList.push(trackingData);
-      this._set('trackingDataList', trackingDataList);
-      console.log('tracking data added!');
+    addAccessedPage: function (accessedPage) {
+      var accessedPages = this.accessedPages();
+      accessedPages.push(accessedPage);
+      this._set('accessedPages', accessedPages);
     },
 
-    cleanTrackingDataList: function () {
-      this._set('trackingDataList', []);
-      console.log('tracking data cleanned!');
+    cleanAccessedPages: function () {
+      this._set('accessedPages', []);
     }
   };
 
   var init = function () {
-    trackUserOrSaveData();
+    saveAccessedPage();
+    tryTrackUser();
     bindSendContactButton();
   };
 
-  var currentPage = function () {
+  var currentUrl = function () {
     return window.location.href;
   };
 
@@ -52,34 +52,38 @@ var UserTracking = (function () {
     return new Date().toLocaleString();
   };
 
-  var currentTrackingData = function () {
+  var currentAccessedPage = function () {
     return {
-      page: currentPage(),
-      dateTime: currentDateTime()
+      url: currentUrl(),
+      datetime: currentDateTime()
     };
   };
 
-  var trackUser = function () {
-    var trackingData = currentTrackingData(),
-      userEmail = Storage.userEmail();
-
-    if (!trackingData || !userEmail) return;
-
-    console.log('User tracked!');
-
-    // makeRequest({
-    //   url: '',
-    //   method: 'POST',
-    //   onSucess: onTrackUserSuccess
-    // });
+  var tracking = function () {
+    return {
+      email: Store.userEmail(),
+      accessed_pages: Store.accessedPages()
+    }
   };
 
-  var trackUserOrSaveData = function () {
-    if (Storage.userEmail()) {
-      trackUser();
-    } else {
-      Storage.addTrackingData(currentTrackingData());
-    }
+  var trackUser = function () {
+    makeRequest({
+      url: 'http://localhost:3000/track',
+      method: 'POST',
+      data: {
+        tracking: tracking()
+      },
+      onSuccess: onTrackUserSuccess
+    });
+  };
+
+  var tryTrackUser = function () {
+    if (!Store.userEmail()) return;
+    trackUser();
+  };
+
+  var saveAccessedPage = function () {
+    Store.addAccessedPage(currentAccessedPage());
   };
 
   var sendContactButtonClicked = function () {
@@ -89,14 +93,8 @@ var UserTracking = (function () {
     if (!userEmailInput) return;
 
     userEmail = userEmailInput.value;
-
-    if (Storage.userEmail()) {
-      Storage.cleanTrackingDataList();
-    }
-
-    Storage.saveUserEmail(userEmail);
+    Store.saveUserEmail(userEmail);
     trackUser();
-    Storage.cleanTrackingDataList();
   };
 
   var bindSendContactButton = function () {
@@ -111,26 +109,25 @@ var UserTracking = (function () {
   };
 
   var onTrackUserSuccess = function () {
-    console.log('User tracked with success!');
+    Store.cleanAccessedPages();
   };
 
   var makeRequest = function (args) {
     var url = args.url || '',
       method = args.method || 'GET',
       onSuccess = args.onSuccess || function () {},
-      httpRequest = new XMLHttpRequest();
+      onError = args.onError || function () {},
+      data = args.data || {};
 
-    httpRequest.onreadystatechange = function () {
-      var COMPLETE = 4,
-        OK = 200;
-
-      if (!this.readyState === COMPLETE || !this.status == OK) return;
-      onSucess();
-    };
-
-    httpRequest.open(method, url, true);
-    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-    httpRequest.send();
+    axios({
+      method: method,
+      url: url,
+      data: data
+    }).then(function (response) {
+      onSuccess(response);
+    }).catch(function (error) {
+      onError(error);
+    });
   };
 
   return {
