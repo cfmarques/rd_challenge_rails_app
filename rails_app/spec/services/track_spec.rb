@@ -6,7 +6,7 @@ describe Track do
 
     let(:email) { 'cf.marques@live.com' }
     let(:url) { 'https://www.resultadosdigitais.com.br/' }
-    let(:accessed_page) { { url: url, datetime: DateTime.current } }
+    let(:accessed_page) { { url: url, datetime: '11/15/2017, 4:14:04 PM' } }
     let(:accessed_pages) { [accessed_page] }
     let(:tracking) { Tracking.new(email: email, accessed_pages: accessed_pages) }
 
@@ -18,11 +18,20 @@ describe Track do
     end
 
     context 'when exists a contact with tracking email' do
-      before { Contact.create(email: email) }
+      let!(:contact) { Contact.create(email: email) }
 
       it 'not create a new contact with tracking email' do
         subject.call(tracking)
         expect(Contact.where(email: email).count).to eq 1
+      end
+
+      context 'and this contact has accesses' do
+        before { contact.update(accesses: [ FactoryBot.build(:access) ] ) }
+
+        it 'adding another accesses' do
+          subject.call(tracking)
+          expect(contact.accesses.count).to be > 1
+        end
       end
     end
 

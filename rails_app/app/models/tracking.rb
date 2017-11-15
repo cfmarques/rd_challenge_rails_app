@@ -19,8 +19,16 @@ class Tracking
 
   private
 
-  def datetime(string_datetime)
-    datetime_pattern = "%m/%d/%Y, %H:%M:%S"
-    DateTime.strptime(string_datetime, datetime_pattern)
+  def datetime(datetime)
+    return datetime if datetime.is_a?(DateTime)
+
+    begin
+      DateTime.strptime(datetime)
+    rescue
+      datetime_pattern = "%m/%d/%Y, %H:%M:%S"
+      DateTime.strptime(datetime, datetime_pattern)
+    else
+      nil
+    end
   end
 end
