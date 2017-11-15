@@ -94,6 +94,7 @@ var UserTracking = (function () {
 
     userEmail = userEmailInput.value;
     Store.saveUserEmail(userEmail);
+    saveAccessedPage();
     trackUser();
   };
 
