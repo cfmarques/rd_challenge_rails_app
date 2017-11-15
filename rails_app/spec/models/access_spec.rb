@@ -1,5 +1,7 @@
 require 'rails_helper'
 
 describe Access do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { is_expected.to belong_to(:contact) }
+  it { is_expected.to belong_to(:page) }
+  it { is_expected.to validate_presence_of(:datetime) }
 end
