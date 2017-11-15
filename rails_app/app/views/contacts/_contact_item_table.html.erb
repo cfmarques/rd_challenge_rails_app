@@ -1,0 +1,13 @@
+<tr>
+  <td>
+    <%= link_to contact.email, contact_path(contact.id) %>
+  </td>
+
+  <td>
+    <%= contact.accesses.last.page_url %>
+  </td>
+
+  <td>
+    <%= t contact.accesses.last.datetime %>
+  </td>
+</tr>

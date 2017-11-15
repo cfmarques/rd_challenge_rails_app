@@ -1,0 +1,21 @@
+<table class='table table-striped table-hover'>
+  <thead>
+    <tr>
+      <th>
+        Email
+      </th>
+
+      <th>
+        Última página acessada
+      </th>
+
+      <th>
+        Data e hora do último acesso
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= render partial: 'contact_item_table', collection: contacts, as: :contact %>
+  </tbody>
+</table>
