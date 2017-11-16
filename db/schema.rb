@@ -12,9 +12,12 @@
 
 ActiveRecord::Schema.define(version: 20171115090210) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "accesses", force: :cascade do |t|
-    t.integer "contact_id"
-    t.integer "page_id"
+    t.bigint "contact_id"
+    t.bigint "page_id"
     t.datetime "datetime"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -34,4 +37,6 @@ ActiveRecord::Schema.define(version: 20171115090210) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "accesses", "contacts"
+  add_foreign_key "accesses", "pages"
 end
