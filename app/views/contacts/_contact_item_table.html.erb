@@ -4,10 +4,14 @@
   </td>
 
   <td>
-    <%= contact.accesses.last.page_url %>
+    <%= t contact.last_access.page_name %>
   </td>
 
   <td>
-    <%= l contact.accesses.last.datetime %>
+    <%= l contact.last_access.datetime %>
+  </td>
+
+  <td>
+    <%= contact.prospect? ? 'Sim' : 'Não' %>
   </td>
 </tr>

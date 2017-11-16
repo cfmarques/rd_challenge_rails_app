@@ -2,24 +2,20 @@
   <thead>
     <tr>
       <th>
-        Email
+        Páginas acessadas
       </th>
 
       <th>
-        Última página acessada
+        Url das páginas
       </th>
 
       <th>
         Data e hora do último acesso
       </th>
-
-      <th>
-        Cliente em prospecção?
-      </th>
     </tr>
   </thead>
 
   <tbody>
-    <%= render partial: 'contact_item_table', collection: contacts, as: :contact %>
+    <%= render partial: 'accessed_page_item_table', collection: contact.pages, as: :page, locals: { contact: contact } %>
   </tbody>
 </table>

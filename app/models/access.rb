@@ -4,5 +4,6 @@ class Access < ApplicationRecord
 
   validates :datetime, presence: true
 
+  delegate :name, to: :page, prefix: true
   delegate :url, to: :page, prefix: true
 end
