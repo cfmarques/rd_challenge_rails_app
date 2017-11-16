@@ -8,7 +8,7 @@ User tracking is a rails application that persists user navigation in a website 
 - Postgres 10.1. It's recommended an installation from a package manager, such as brew, apt-get, etc;
 
 ### Getting Started
-After download or clone this repository, at the command prompt run the commands:
+After downloading or cloning this repository, at the command prompt run the commands:
 ```bash
 $ bundle
 $ rake db:drop db:create db:migrate
@@ -49,6 +49,6 @@ Using a browser, go to http://localhost:8000 and you'll see a website.
 
 Browse the website and fill the email input at the contact page and press the button.
 
-After you press the button your email and navigation will registered.
+After you press the button your email and navigation will be registered.
 
 Using a browser, go to http://localhost:3000 and you will see your data there.
