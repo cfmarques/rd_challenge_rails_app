@@ -1,11 +1,11 @@
 # README
 
 ### Welcome to User tracking
-User tracking is a rails application that persist user navigation in website from javascript library and show the datas for analysis.
+User tracking is a rails application that persists user navigation in a website from a javascript library and displays the data for analysis.
 
 ### System dependencies
-- Ruby 2.4.2. I recommend install form RVM (https://rvm.io/);
-- Postgres 10.1. I recommed install using a package manager as brew, apt-get, etc;
+- Ruby 2.4.2. It's recommended an installation from RVM (https://rvm.io/);
+- Postgres 10.1. It's recommended an installation from a package manager, such as brew, apt-get, etc;
 
 ### Getting Started
 After download or clone this repository, at the command prompt run the commands:
@@ -15,7 +15,7 @@ $ rake db:drop db:create db:migrate
 $ rails s
 ```
 
-At moment you start a application server.
+At that moment you start an application server.
 
 Using a browser, go to http://localhost:3000 and you'll see the contact list.
 
@@ -26,19 +26,19 @@ $ rspec
 ```
 
 ### How to test the application locally
-At project path, start server with the command:
+At project path, start the server with the command:
 ```bash
 $ rails s
 ```
 Using a browser, go to http://localhost:3000 and you'll see the contact list.
 
-It is required a website and javascript library to call the application and generate datas for be displayed.
+It is required a website and a javascript library to communicate with the application and generate data to be displayed.
 
-I suggest my sample website that use my javascript library and already integrate with this application. 
+I suggest my sample website which uses my javascript library and already integrates with this application.
 
 Sample website: https://github.com/cfmarques/rd_challenge_website
 
-Download or clone the rd_challenge_website respository (The samplewebsite).
+Download or clone the rd_challenge_website repository (The sample website).
 
 At sample website path, run this command:
 ```bash
@@ -47,8 +47,8 @@ $ ruby -run -e httpd . -p 8000
 
 Using a browser, go to http://localhost:8000 and you'll see a website.
 
-Navegate by website and fill email input in contact page and press the button.
+Browse the website and fill the email input at the contact page and press the button.
 
 After you press the button your email and navigation will registered.
 
-Using a browser, go to http://localhost:3000 and will see your datas is present.
+Using a browser, go to http://localhost:3000 and you will see your data there.
