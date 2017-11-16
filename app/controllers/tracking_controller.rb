@@ -17,7 +17,7 @@ class TrackingController < ApplicationController
   def tracking_params
     params.require(:tracking).permit(
       :email,
-      accessed_pages: [ :url, :datetime ]
+      accessed_pages: [ :url, :pathname, :datetime ]
     )
   end
 end

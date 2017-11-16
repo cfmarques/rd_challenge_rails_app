@@ -12,6 +12,7 @@ class Tracking
     @accessed_pages = accessed_pages.map do |accessed_page_hash|
       OpenStruct.new(
         url: accessed_page_hash[:url],
+        pathname: accessed_page_hash[:pathname],
         datetime: datetime(accessed_page_hash[:datetime])
       )
     end

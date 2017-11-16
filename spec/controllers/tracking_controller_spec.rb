@@ -16,7 +16,7 @@ describe TrackingController do
     end
 
     context 'with valid tracking parameters' do
-      let(:accessed_pages) { [ { url: 'https://www.resultadosdigitais.com.br', datetime: DateTime.current } ] }
+      let(:accessed_pages) { [ { url: 'https://www.resultadosdigitais.com.br', pathname: '/', datetime: DateTime.current } ] }
       let(:tracking) { { email: 'cf.marques@live.com', accessed_pages: accessed_pages } }
       let(:params) { { tracking: tracking } }
 
