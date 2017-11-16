@@ -13,23 +13,8 @@ class Tracking
       OpenStruct.new(
         url: accessed_page_hash[:url],
         pathname: accessed_page_hash[:pathname],
-        datetime: datetime(accessed_page_hash[:datetime])
+        datetime: accessed_page_hash[:datetime]
       )
-    end
-  end
-
-  private
-
-  def datetime(datetime)
-    return datetime if datetime.is_a?(DateTime)
-
-    begin
-      DateTime.strptime(datetime)
-    rescue
-      datetime_pattern = "%m/%d/%Y, %H:%M:%S"
-      DateTime.strptime(datetime, datetime_pattern)
-    else
-      nil
     end
   end
 end
