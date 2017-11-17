@@ -52,4 +52,4 @@ Browse the website and fill the email input at the contact page and press the bu
 
 After you press the button your email and navigation will be registered.
 
-Using a browser, go to http://localhost:3000 and you will see your data there.
+Using a browser, go to http://localhost:3000 and you will see your data there.
