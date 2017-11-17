@@ -6,6 +6,7 @@ User tracking is a rails application that persists user navigation in a website 
 ### System dependencies
 - Ruby 2.4.2. It's recommended an installation from RVM (https://rvm.io/);
 - Postgres 10.1. It's recommended an installation from a package manager, such as brew, apt-get, etc;
+- Bundler. After install ruby you can run gem install bundler to install it.
 
 ### Getting Started
 After downloading or cloning this repository, at the command prompt run the commands:
