@@ -20,14 +20,17 @@ describe TrackingController do
       let(:tracking) { { email: 'cf.marques@live.com', accessed_pages: accessed_pages } }
       let(:params) { { tracking: tracking } }
 
-      it 'call Track service with a Track instance' do
-        expect_any_instance_of(Track).to receive(:call).with(an_instance_of(Tracking))
-        post :track, params: params
+      it 'Track job was enqueued with tracking instance' do
+        ActiveJob::Base.queue_adapter = :test
+
+        expect{
+          post :track, params: params
+        }.to have_enqueued_job(TrackJob)
       end
 
-      it 'returns status code 201' do
+      it 'returns status code 202' do
         post :track, params: params
-        expect(response.status).to eq(201)
+        expect(response.status).to eq(202)
       end
     end
   end

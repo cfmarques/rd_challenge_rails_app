@@ -5,8 +5,8 @@ class TrackingController < ApplicationController
     tracking = Tracking.new(tracking_params)
 
     if tracking.valid?
-      Track.new.call(tracking)
-      render json: {}, status: :created
+      TrackJob.perform_later(tracking_params.to_h)
+      render json: {}, status: :accepted
     else
       render json: {}, status: :unprocessable_entity
     end
