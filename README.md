@@ -6,7 +6,8 @@ User tracking is a rails application that persists user navigation in a website 
 ### System dependencies
 - Ruby 2.4.2. It's recommended an installation from RVM (https://rvm.io/);
 - Postgres 10.1. It's recommended an installation from a package manager, such as brew, apt-get, etc;
-- Bundler. After install ruby you can run gem install bundler to install it. (http://bundler.io/)
+- Bundler. After install ruby you can run gem install bundler to install it. (http://bundler.io/);
+- Redis. It's recommended an installation from a package manager, such as brew, apt-get, etc.
 
 ### Getting Started
 After downloading or cloning this repository, at the command prompt run the commands:
@@ -27,10 +28,21 @@ $ rspec
 ```
 
 ### How to test the application locally
-At project path, start the server with the command:
+In a terminal at project path, start the server with the command:
 ```bash
 $ rails s
 ```
+
+In another terminal at project path, start redis server with the command:
+```bash
+$ redis-server
+```
+
+In another terminal at project path, start sidekiq to process background jobs with the command:
+```bash
+$ sidekiq
+```
+
 Using a browser, go to http://localhost:3000 and you'll see the contact list.
 
 It is required a website and a javascript library to communicate with the application and generate data to be displayed.
